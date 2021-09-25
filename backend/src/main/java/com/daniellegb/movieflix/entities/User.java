@@ -85,6 +85,13 @@ public class User implements Serializable{
 	public void setId(Long id) {
 		this.id = id;
 	}
+	public Set<Role> getRoles() {
+		return roles;
+	}
+
+	public List<Review> getReviews() {
+		return reviews;
+	}
 
 	@Override
 	public int hashCode() {

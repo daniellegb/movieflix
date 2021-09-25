@@ -78,7 +78,5 @@ public class Review implements Serializable{
 		Review other = (Review) obj;
 		return Objects.equals(id, other.id);
 	}
-	
-	
 
 }
