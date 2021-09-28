@@ -2,6 +2,8 @@ package com.daniellegb.movieflix.dto;
 
 import java.io.Serializable;
 
+import com.daniellegb.movieflix.entities.Review;
+
 
 public class ReviewDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
@@ -15,11 +17,17 @@ public class ReviewDTO implements Serializable{
 	}
 
 	public ReviewDTO(Long id, String text, Long movieId, Long userId) {
-		super();
 		this.id = id;
 		this.text = text;
 		this.movieId = movieId;
 		this.userId = userId;
+	}
+	
+	public ReviewDTO(Review entity) {
+		id = entity.getId();
+		text = entity.getText();
+		movieId = entity.getMovie().getId();
+		userId = entity.getUser().getId();
 	}
 
 	public Long getId() {
