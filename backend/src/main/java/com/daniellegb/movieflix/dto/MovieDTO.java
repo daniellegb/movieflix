@@ -1,12 +1,15 @@
 package com.daniellegb.movieflix.dto;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.daniellegb.movieflix.entities.Genre;
 import com.daniellegb.movieflix.entities.Movie;
 
-public class MovieDTO {
+public class MovieDTO implements Serializable{
+	private static final long serialVersionUID = 1L;
+
 
 	private Long id;
 	private String title;
