@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.daniellegb.movieflix.dto.MovieDTO;
 import com.daniellegb.movieflix.entities.Movie;
 import com.daniellegb.movieflix.repositories.MovieRepository;
+import com.daniellegb.movieflix.services.exceptions.ResourceNotFoundException;
 
 @Service
 public class MovieService {
@@ -27,7 +28,7 @@ public class MovieService {
 	@Transactional(readOnly = true)
 	public MovieDTO findById(Long id) {
 		Optional<Movie> obj = repository.findById(id);
-		Movie entity = obj.orElseThrow(null); //Need to add exception
+		Movie entity = obj.orElseThrow(() -> new ResourceNotFoundException("Movie not found"));
 		return new MovieDTO(entity, entity.getReviews());
 	}
 	

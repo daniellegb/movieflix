@@ -15,7 +15,7 @@ import com.daniellegb.movieflix.dto.GenreDTO;
 import com.daniellegb.movieflix.services.GenreService;
 
 @RestController
-@RequestMapping(value = "/genre")
+@RequestMapping(value = "/genres")
 public class GenreResource {
 
 	@Autowired
@@ -24,7 +24,7 @@ public class GenreResource {
 	@GetMapping
 	public ResponseEntity<Page<GenreDTO>> findAll(
 			@RequestParam(value = "page", defaultValue = "0") Integer page,
-			@RequestParam(value = "linesPerPage", defaultValue = "12") Integer linesPerPage,
+			@RequestParam(value = "linesPerPage", defaultValue = "3") Integer linesPerPage,
 			@RequestParam(value = "direction", defaultValue = "ASC") String direction,
 			@RequestParam(value = "orderBy", defaultValue = "name") String orderBy
 			){

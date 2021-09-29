@@ -18,8 +18,6 @@ import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-
-
 @Entity
 @Table(name = "tb_user")
 public class User implements Serializable{

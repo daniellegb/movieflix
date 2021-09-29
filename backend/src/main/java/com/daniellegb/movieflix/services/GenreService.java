@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.daniellegb.movieflix.dto.GenreDTO;
 import com.daniellegb.movieflix.entities.Genre;
 import com.daniellegb.movieflix.repositories.GenreRepository;
+import com.daniellegb.movieflix.services.exceptions.ResourceNotFoundException;
 
 @Service
 public class GenreService {
@@ -27,7 +28,7 @@ public class GenreService {
 	@Transactional(readOnly = true)
 	public GenreDTO findById(Long id) {
 		Optional<Genre> genre = repository.findById(id);
-		Genre entity = genre.orElseThrow(null); //Exception need to be add!!
+		Genre entity = genre.orElseThrow(() -> new ResourceNotFoundException("Genre not found"));
 		return new GenreDTO(entity, entity.getMovies());
 	}
 	
