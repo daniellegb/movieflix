@@ -22,6 +22,17 @@ INSERT INTO tb_movie (title, sub_Title, year, img_Url, synopsis, genre_id) VALUE
 INSERT INTO tb_movie (title, sub_Title, year, img_Url, synopsis, genre_id) VALUES ('Harry Potter', 'and the Philosophers Stone', 2001, 'https://www.themoviedb.org/t/p/w220_and_h330_face/mavk9xclj6e5hFFk7I0ZNLo4nVD.jpg', 'Harry Potter has lived under the stairs at his aunt and uncle´s house his whole life. But on his 11th birthday, he learns he´s a powerful wizard -- with a place waiting for him at the Hogwarts School of Witchcraft and Wizardry', 3);
 INSERT INTO tb_movie (title, sub_Title, year, img_Url, synopsis, genre_id) VALUES ('The Warriors', '', 2021, 'https://www.themoviedb.org/t/p/w220_and_h330_face/7BCTdek5LFHglcgl7shsm7igJAH.jpg', 'Warlords, warriors and statesmen wage a battle for supremacy in this fantasy tale based on the hit video games and the "Romance of the Three Kingdoms."', 3);
 
+INSERT INTO tb_genre_movies (genre_Id, movies_Id) VALUES (1, 1);
+INSERT INTO tb_genre_movies (genre_Id, movies_Id) VALUES (1, 2);
+INSERT INTO tb_genre_movies (genre_Id, movies_Id) VALUES (1, 3);
+INSERT INTO tb_genre_movies (genre_Id, movies_Id) VALUES (1, 4);
+INSERT INTO tb_genre_movies (genre_Id, movies_Id) VALUES (2, 5);
+INSERT INTO tb_genre_movies (genre_Id, movies_Id) VALUES (2, 6);
+INSERT INTO tb_genre_movies (genre_Id, movies_Id) VALUES (2, 7);
+INSERT INTO tb_genre_movies (genre_Id, movies_Id) VALUES (3, 8);
+INSERT INTO tb_genre_movies (genre_Id, movies_Id) VALUES (3, 9);
+INSERT INTO tb_genre_movies (genre_Id, movies_Id) VALUES (3, 10);
+
 INSERT INTO tb_review (text, movie_id, user_id) VALUES ('Now I hate bees!', 1, 2);
 INSERT INTO tb_review (text, movie_id, user_id) VALUES ('Need to watch it!', 2, 2);
 INSERT INTO tb_review (text, movie_id, user_id) VALUES ('This one creeps me out!', 3, 2);
