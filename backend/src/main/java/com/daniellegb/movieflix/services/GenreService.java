@@ -21,14 +21,14 @@ public class GenreService {
 	@Transactional(readOnly = true)
 	public Page<GenreDTO> findAllPaged(PageRequest pageRequest){
 		Page<Genre> list = repository.findAll(pageRequest);
-		return list.map(genre -> new GenreDTO(genre));
+		return list.map(genre -> new GenreDTO(genre, genre.getMovies()));
 	}
 	
 	@Transactional(readOnly = true)
 	public GenreDTO findById(Long id) {
 		Optional<Genre> genre = repository.findById(id);
 		Genre entity = genre.orElseThrow(null); //Exception need to be add!!
-		return new GenreDTO(entity);
+		return new GenreDTO(entity, entity.getMovies());
 	}
 	
 }

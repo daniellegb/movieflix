@@ -10,7 +10,6 @@ import com.daniellegb.movieflix.entities.Movie;
 public class MovieDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 
-
 	private Long id;
 	private String title;
 	private String subTitle;
@@ -44,7 +43,7 @@ public class MovieDTO implements Serializable{
 		year = entity.getYear();
 		imgUrl = entity.getImgUrl();
 		synopsis = entity.getSynopsis();
-		genre = entity.getGenre();
+		//genre = entity.getGenre();
 		//reviews.forEach(review -> this.reviews.add(review));
 	}
 
