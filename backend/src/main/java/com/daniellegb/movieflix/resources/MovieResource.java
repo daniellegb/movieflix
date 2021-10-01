@@ -15,7 +15,7 @@ import com.daniellegb.movieflix.dto.MovieDTO;
 import com.daniellegb.movieflix.services.MovieService;
 
 @RestController
-@RequestMapping(value = "/movie")
+@RequestMapping(value = "/movies")
 public class MovieResource {
 	
 	@Autowired
