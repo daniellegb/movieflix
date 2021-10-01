@@ -32,7 +32,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter{
 	
 	private static final String[] PUBLIC = { "/oauth/token", "/h2-console/**" };
 	
-	private static final String[] VISITOR_OR_MEMBER = { "/movies/**" , "/genres/**" , "/reviews/**"};
+	private static final String[] PUBLIC_OR_MEMBER = { "/movies/**" , "/genres/**" , "/reviews/**"};
 	
 	private static final String[] MEMBER = { "/reviews/**" };
 	
@@ -51,9 +51,9 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter{
 		
 		http.authorizeRequests()
 		.antMatchers(PUBLIC).permitAll()
-		.antMatchers(HttpMethod.GET, VISITOR_OR_MEMBER).permitAll()
-		.antMatchers(HttpMethod.POST, MEMBER).permitAll()
-		.antMatchers(VISITOR_OR_MEMBER).hasAnyRole("VISITOR", "MEMBER")
+		.antMatchers(HttpMethod.GET, PUBLIC_OR_MEMBER).permitAll()
+		.antMatchers(HttpMethod.POST, PUBLIC).denyAll()
+		.antMatchers(PUBLIC_OR_MEMBER).hasAnyRole("VISITOR", "MEMBER")
 		.antMatchers(MEMBER).hasRole("MEMBER")
 		.anyRequest().authenticated();
 
