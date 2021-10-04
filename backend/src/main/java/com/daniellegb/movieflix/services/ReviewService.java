@@ -1,12 +1,12 @@
 package com.daniellegb.movieflix.services;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import javax.persistence.EntityNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,20 +19,20 @@ import com.daniellegb.movieflix.services.exceptions.ResourceNotFoundException;
 
 @Service
 public class ReviewService {
-	
+
 	@Autowired
 	private ReviewRepository repository;
-	
+
 	@Autowired
 	private MovieRepository movieRepository;
-	
+
 	@Autowired
 	private UserRepository userRepository;
 
 	@Transactional(readOnly = true)
-	public Page<ReviewDTO> findAllPaged(PageRequest pageRequest){
-		Page<Review> list = repository.findAll(pageRequest);
-		return list.map(review -> new ReviewDTO(review));
+	public List<ReviewDTO> findAll() {
+		List<Review> list = repository.findAll();
+		return createDtoFromEntities(list);
 	}
 
 	@Transactional(readOnly = true)
@@ -41,25 +41,41 @@ public class ReviewService {
 		Review entity = obj.orElseThrow(() -> new ResourceNotFoundException("Entity not found"));
 		return new ReviewDTO(entity);
 	}
-	
+
 	@Transactional
 	public ReviewDTO insert(ReviewDTO dto) {
-		Review entity = new Review();
-		copyDtoToEntity(dto, entity);
+		Review entity = createEntityFromDto(dto);
 		entity = repository.save(entity);
 		return new ReviewDTO(entity);
 	}
-	
-	private void copyDtoToEntity(ReviewDTO dto, Review entity) {
-		entity.setId(dto.getId());
+
+	private Review createEntityFromDto(ReviewDTO dto) {
+		Review entity = new Review();
 		entity.setText(dto.getText());
 		entity.setMovie(movieRepository.getOne(dto.getMovieId()));
 		try {
-			entity.setUser(userRepository.getOne(dto.getUserId()));
+			entity.setUser(userRepository.getOne(dto.getUser().getId()));
+			} catch (EntityNotFoundException e) {
+				throw new ResourceNotFoundException("Id not find" + dto.getId());
 		}
-		catch(EntityNotFoundException e) {
-			throw new ResourceNotFoundException("Id not find" + dto.getId());
-		}
+		return entity;
 	}
-	
+
+	private List<ReviewDTO> createDtoFromEntities(List<Review> entities) {
+		List<ReviewDTO> listDTO = new ArrayList<>();
+		for (int x = 0; x < entities.size(); x++) {
+			ReviewDTO dto = new ReviewDTO();
+			dto.setId(entities.get(x).getId());
+			dto.setMovieId(entities.get(x).getMovie().getId());
+			dto.setText(entities.get(x).getText());
+			try {
+				dto.setUser(userRepository.getOne(entities.get(x).getUser().getId()));
+				
+				} catch (EntityNotFoundException e) {
+					throw new ResourceNotFoundException("Id not find" + entities.get(x).getUser().getId());
+			}
+			listDTO.add(dto);
+		}
+		return listDTO;
+	}
 }
