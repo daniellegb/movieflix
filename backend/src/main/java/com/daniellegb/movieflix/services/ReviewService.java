@@ -7,11 +7,14 @@ import java.util.Optional;
 import javax.persistence.EntityNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.daniellegb.movieflix.dto.ReviewDTO;
 import com.daniellegb.movieflix.entities.Review;
+import com.daniellegb.movieflix.entities.User;
 import com.daniellegb.movieflix.repositories.MovieRepository;
 import com.daniellegb.movieflix.repositories.ReviewRepository;
 import com.daniellegb.movieflix.repositories.UserRepository;
@@ -39,43 +42,76 @@ public class ReviewService {
 	public ReviewDTO findById(Long id) {
 		Optional<Review> obj = repository.findById(id);
 		Review entity = obj.orElseThrow(() -> new ResourceNotFoundException("Entity not found"));
-		return new ReviewDTO(entity);
+		return new ReviewDTO(entity, entity.getUser().getId());
 	}
 
 	@Transactional
 	public ReviewDTO insert(ReviewDTO dto) {
 		Review entity = createEntityFromDto(dto);
 		entity = repository.save(entity);
-		return new ReviewDTO(entity);
+		return new ReviewDTO(entity, entity.getUser().getId());
 	}
 
 	private Review createEntityFromDto(ReviewDTO dto) {
 		Review entity = new Review();
+		entity.setId(getNextId());
 		entity.setText(dto.getText());
 		entity.setMovie(movieRepository.getOne(dto.getMovieId()));
-		try {
-			entity.setUser(userRepository.getOne(dto.getUser().getId()));
-			} catch (EntityNotFoundException e) {
-				throw new ResourceNotFoundException("Id not find" + dto.getId());
-		}
+		User loggedUser = userRepository.findByEmail(getCurrentUserEmail());
+		entity.setUser(loggedUser);
 		return entity;
 	}
 
 	private List<ReviewDTO> createDtoFromEntities(List<Review> entities) {
 		List<ReviewDTO> listDTO = new ArrayList<>();
 		for (int x = 0; x < entities.size(); x++) {
-			ReviewDTO dto = new ReviewDTO();
-			dto.setId(entities.get(x).getId());
-			dto.setMovieId(entities.get(x).getMovie().getId());
-			dto.setText(entities.get(x).getText());
+			Review entity = new Review();
+			entity.setId(entities.get(x).getId());
+			entity.setMovie(entities.get(x).getMovie());
+			entity.setText(entities.get(x).getText());
 			try {
-				dto.setUser(userRepository.getOne(entities.get(x).getUser().getId()));
-				
-				} catch (EntityNotFoundException e) {
-					throw new ResourceNotFoundException("Id not find" + entities.get(x).getUser().getId());
+				entity.setUser(userRepository.getOne(entities.get(x).getUser().getId()));
+
+			} catch (EntityNotFoundException e) {
+				throw new ResourceNotFoundException("Id not find" + entities.get(x).getUser().getId());
 			}
-			listDTO.add(dto);
+			ReviewDTO dto2 = new ReviewDTO(entity, entity.getUser().getId());
+			listDTO.add(dto2);
 		}
 		return listDTO;
 	}
+
+	public Long getNextId() {
+		return repository.count() + 1;
+	}
+
+	public String getCurrentUserEmail() {
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String username;
+		if (principal instanceof UserDetails) {
+			username = ((UserDetails) principal).getUsername();
+		} else {
+			username = principal.toString();
+		}
+		return username;
+	}
+
+//	private List<ReviewDTO> createDtoFromEntities(List<Review> entities) {
+//		List<ReviewDTO> listDTO = new ArrayList<>();
+//		for (int x = 0; x < entities.size(); x++) {
+//			ReviewDTO dto = new ReviewDTO();
+//			dto.setId(entities.get(x).getId());
+//			dto.setMovieId(entities.get(x).getMovie().getId());
+//			dto.setText(entities.get(x).getText());
+//			try {
+//				dto.setUser(userRepository.getOne(entities.get(x).getUser().getId()));
+//				
+//				} catch (EntityNotFoundException e) {
+//					throw new ResourceNotFoundException("Id not find" + entities.get(x).getUser().getId());
+//			}
+//			ReviewDTO dto2 = new ReviewDTO(dto, dto.getUser().getId());
+//			listDTO.add(dto);
+//		}
+//		return listDTO;
+//	}
 }
