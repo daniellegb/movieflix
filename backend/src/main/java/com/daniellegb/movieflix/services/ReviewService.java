@@ -42,14 +42,14 @@ public class ReviewService {
 	public ReviewDTO findById(Long id) {
 		Optional<Review> obj = repository.findById(id);
 		Review entity = obj.orElseThrow(() -> new ResourceNotFoundException("Entity not found"));
-		return new ReviewDTO(entity, entity.getUser().getId());
+		return new ReviewDTO(entity);
 	}
 
 	@Transactional
 	public ReviewDTO insert(ReviewDTO dto) {
 		Review entity = createEntityFromDto(dto);
 		entity = repository.save(entity);
-		return new ReviewDTO(entity, entity.getUser().getId());
+		return new ReviewDTO(entity);
 	}
 
 	private Review createEntityFromDto(ReviewDTO dto) {
@@ -71,11 +71,10 @@ public class ReviewService {
 			entity.setText(entities.get(x).getText());
 			try {
 				entity.setUser(userRepository.getOne(entities.get(x).getUser().getId()));
-
 			} catch (EntityNotFoundException e) {
 				throw new ResourceNotFoundException("Id not find" + entities.get(x).getUser().getId());
 			}
-			ReviewDTO dto2 = new ReviewDTO(entity, entity.getUser().getId());
+			ReviewDTO dto2 = new ReviewDTO(entity);
 			listDTO.add(dto2);
 		}
 		return listDTO;
@@ -95,23 +94,4 @@ public class ReviewService {
 		}
 		return username;
 	}
-
-//	private List<ReviewDTO> createDtoFromEntities(List<Review> entities) {
-//		List<ReviewDTO> listDTO = new ArrayList<>();
-//		for (int x = 0; x < entities.size(); x++) {
-//			ReviewDTO dto = new ReviewDTO();
-//			dto.setId(entities.get(x).getId());
-//			dto.setMovieId(entities.get(x).getMovie().getId());
-//			dto.setText(entities.get(x).getText());
-//			try {
-//				dto.setUser(userRepository.getOne(entities.get(x).getUser().getId()));
-//				
-//				} catch (EntityNotFoundException e) {
-//					throw new ResourceNotFoundException("Id not find" + entities.get(x).getUser().getId());
-//			}
-//			ReviewDTO dto2 = new ReviewDTO(dto, dto.getUser().getId());
-//			listDTO.add(dto);
-//		}
-//		return listDTO;
-//	}
 }
