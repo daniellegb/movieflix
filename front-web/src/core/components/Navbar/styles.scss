@@ -5,8 +5,17 @@
 }
 
 .text-navbar{
+    margin-left: 49px;
+}
+
+.nav-logo-text{
+    text-decoration: none;
+    color:black;
     font-size: 700;
     font-weight: bold;
     font-size: 24px;
-    margin-left: 49px;
+}
+
+.nav-logo-text:hover{
+    color:#525252;
 }
