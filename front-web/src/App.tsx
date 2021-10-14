@@ -1,8 +1,9 @@
+import Navbar from 'core/components/Navbar';
 import './app.scss';
 
 const App = () => {
     return(
-        <h1>Oi</h1>
+        <Navbar />
     );
 }
 
