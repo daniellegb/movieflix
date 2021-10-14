@@ -1,8 +1,8 @@
-import './App.css';
+import './app.scss';
 
-function App() {
+const App = () => {
     return(
-        <h1>Oi!</h1>
+        <h1>Oi</h1>
     );
 }
 
