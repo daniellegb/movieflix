@@ -2,6 +2,7 @@ import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 
 import Home from './pages/Home';
 import Navbar from './core/components/Navbar';
+import Movies from 'pages/Movies';
 
 const Routes = () => (
         <BrowserRouter>
@@ -9,6 +10,9 @@ const Routes = () => (
                 <Switch>
                         <Route path="/" exact>
                                 <Home />
+                        </Route>
+                        <Route path="/movies" exact>
+                                <Movies />
                         </Route>
                 </Switch>
         </BrowserRouter>
