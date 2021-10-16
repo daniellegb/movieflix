@@ -1,4 +1,6 @@
 import { ReactComponent as MainImage } from 'core/assets/images/main-image.svg';
+import MovieMakeReview from '../MovieMakeReview';
+import MovieReview from '../MovieReviews';
 import './styles.scss';
 
 const MovieDetails = () => (
@@ -23,10 +25,10 @@ const MovieDetails = () => (
             </div>
         </div>
         <div className="movie-text-box-container">
-
+            <MovieMakeReview />
         </div>
         <div className="movie-reviews-container">
-
+            <MovieReview />
         </div>
     </div>
 );
