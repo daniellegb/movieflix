@@ -1,0 +1,32 @@
+.reviews-container {
+    padding: 25px 40px 0px 40px;
+}
+
+.user-container {
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 22px;
+    letter-spacing: -0.015em;
+    color: #FFFFFF;
+    padding-bottom: 10px;
+}
+
+.review-container {
+    border: 1px solid #E1E1E1;
+    box-sizing: border-box;
+    border-radius: 4px;
+}
+
+.review-text {
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 22px;
+    text-align: justify;
+    letter-spacing: -0.015em;
+    color: #9E9E9E;
+    padding: 12px 22px 12px 22px;
+}
+
+.user-star {
+    margin-right: 15px;
+}

@@ -1,6 +1,6 @@
 import { ReactComponent as MainImage } from 'core/assets/images/main-image.svg';
 import MovieMakeReview from '../MovieMakeReview';
-import MovieReview from '../MovieReviews';
+import MovieReviews from '../MovieReviews';
 import './styles.scss';
 
 const MovieDetails = () => (
@@ -28,7 +28,8 @@ const MovieDetails = () => (
             <MovieMakeReview />
         </div>
         <div className="movie-reviews-container">
-            <MovieReview />
+            <MovieReviews userName="Ana" review="Muito legal!"/>
+            <MovieReviews userName="Joana" review="Super legal!"/>
         </div>
     </div>
 );
