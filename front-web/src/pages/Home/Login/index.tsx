@@ -4,6 +4,7 @@ import { makeLogin } from 'core/utils/request';
 import { type } from 'os';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useHistory } from 'react-router-dom';
 import './styles.scss';
 
 type FormData = {
@@ -19,12 +20,14 @@ const Login = () => {
         formState: { errors },
       } = useForm<FormData>();
     const [hasError, setHasError] = useState(false);
+    const history = useHistory();
 
     const onSubmit = (data: FormData) => {
         makeLogin(data)
         .then(response => {
             setHasError(false);
             saveSessionData(response.data);
+            history.push('/movies')
         })
         .catch(() => {
             setHasError(true);
