@@ -1,9 +1,10 @@
 import ButtonIcon from 'core/components/ButtonIcon';
+import { makeLogin } from 'core/utils/request';
 import { useForm } from 'react-hook-form';
 import './styles.scss';
 
 type FormData = {
-    email: string;
+    username: string;
     password: string;
 }
 
@@ -14,7 +15,10 @@ const Login = () => {
         handleSubmit,
         formState: { errors },
       } = useForm<FormData>();
-    const onSubmit = (data: FormData) => console.log(data);
+    const onSubmit = (data: FormData) => {
+        console.log(data);
+        makeLogin(data);
+    };
 
     return (
         <div className="login-container">
@@ -24,7 +28,7 @@ const Login = () => {
                     type="email"
                     className="text-form"
                     placeholder="e-mail"
-                    {...register('email')}
+                    {...register('username')}
                 />
                 <input
                     type="password"
