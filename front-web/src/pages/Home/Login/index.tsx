@@ -1,4 +1,5 @@
 import ButtonIcon from 'core/components/ButtonIcon';
+import { saveSessionData } from 'core/utils/auth';
 import { makeLogin } from 'core/utils/request';
 import { type } from 'os';
 import { useState } from 'react';
@@ -23,6 +24,7 @@ const Login = () => {
         makeLogin(data)
         .then(response => {
             setHasError(false);
+            saveSessionData(response.data);
         })
         .catch(() => {
             setHasError(true);
@@ -38,13 +40,13 @@ const Login = () => {
                     type="email"
                     className="text-form"
                     placeholder="e-mail"
-                    {...register('username')}
+                    {...register('username', {required: true})}
                 />
                 <input
                     type="password"
                     className="text-form"
                     placeholder="password"
-                    {...register('password')}
+                    {...register('password', {required: true})}
                 />
                 <ButtonIcon button="login" />
             </form>
