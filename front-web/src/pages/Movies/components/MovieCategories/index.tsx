@@ -12,10 +12,10 @@ const MovieCategories = () => (
                         <option value="1">Science Fiction</option>
                     </Route>
                     <Route path="/movies?genreId=2">
-                        <option value="3">Action</option>
+                        <option value="2">Action</option>
                     </Route>
                     <Route path="/movies?genreId=3">
-                        <option value="2">Fantasy</option>
+                        <option value="3">Fantasy</option>
                     </Route>
                 </Switch>
         </select>

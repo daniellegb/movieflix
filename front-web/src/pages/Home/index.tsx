@@ -1,5 +1,5 @@
 import { ReactComponent as MainImage } from 'core/assets/images/main-image.svg';
-import ButtonIcon from 'core/components/ButtonIcon';
+import Login from './Login';
 import './styles.scss';
 
 const Home = () => (
@@ -15,24 +15,7 @@ const Home = () => (
                 <MainImage className="main-image" />
             </div>
         </div> 
-        <div className="login-container">
-            <h1 className="login-style">LOGIN</h1>
-            <input
-                value="name"
-                name="name"
-                type="text"
-                className="text-form"
-                placeholder="e-mail"
-            />
-            <input
-                value="password"
-                name="password"
-                type="text"
-                className="text-form"
-                placeholder="password"
-            />
-            <ButtonIcon button="login" />
-        </div>
+        <Login />
     </div>
 );
 
