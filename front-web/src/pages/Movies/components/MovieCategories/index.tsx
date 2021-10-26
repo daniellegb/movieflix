@@ -1,3 +1,4 @@
+import { Route, Switch } from 'react-router-dom';
 import './styles.scss';
 
 const MovieCategories = () => (
@@ -6,9 +7,17 @@ const MovieCategories = () => (
             value="Categorias"
             className="select-style text-style"
             name="category">
-            <option value="1">Science Fiction</option>
-            <option value="3">Action</option>
-            <option value="2">Fantasy</option>
+                <Switch>
+                    <Route path="/movies?genreId=1">
+                        <option value="1">Science Fiction</option>
+                    </Route>
+                    <Route path="/movies?genreId=2">
+                        <option value="3">Action</option>
+                    </Route>
+                    <Route path="/movies?genreId=3">
+                        <option value="2">Fantasy</option>
+                    </Route>
+                </Switch>
         </select>
     </div>
 );
