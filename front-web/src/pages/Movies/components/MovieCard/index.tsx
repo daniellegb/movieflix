@@ -1,3 +1,4 @@
+import { Movie } from 'core/types/Movie';
 import './styles.scss';
 
 const MovieCard = () => (
@@ -6,13 +7,13 @@ const MovieCard = () => (
         <img src={""} alt={"filme"} className="movie-card-image" />
         <div className="movie-info">
             <div className="movie-title">
-                As duas torres
+                titulo
             </div>
             <div className="movie-year">
-                ano 1999
+                2002
             </div>
             <div className="movie-subtitle">
-                sub-título
+                subtitle
             </div>
         </div>
     </div>

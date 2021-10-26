@@ -1,26 +1,43 @@
 import { ReactComponent as MainImage } from 'core/assets/images/main-image.svg';
+import { Movie } from 'core/types/Movie';
+import { makeRequest } from 'core/utils/request';
+import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import MovieMakeReview from '../MovieMakeReview';
 import MovieReviews from '../MovieReviews';
 import './styles.scss';
 
-const MovieDetails = () => (
-    <div className="movie-details-container">
+type ParamsType = {
+    movieId: string;
+}
+
+const MovieDetails = () => {
+
+    const { movieId } = useParams<ParamsType>();
+    const [movie, setMovie] = useState<Movie>();
+
+    useEffect(() => {
+        makeRequest({url: `/movies/${movieId}`})
+        .then(response => setMovie(response.data));
+    }, []);
+
+    
+    return (
+        <div className="movie-details-container">
         <div className="movie-detail-container">
-            <div className="image-container">
-                <MainImage />
-            </div>
+            <img src={movie?.imgUrl} alt={movie?.title} className="image-container" />
             <div className="details-container">
                 <h2 className="movie-title">
-                    Movie title
+                    {movie?.title}
                 </h2>
                 <h3 className="movie-year">
-                    year 1999
+                    {movie?.year}
                 </h3>
                 <h3 className="movie-subtitle">
-                    Subtitle
+                    {movie?.subtitle}
                 </h3>
                 <h4 className="movie-synopsis">
-                    Synopsis
+                    {movie?.synopsis}
                 </h4>
             </div>
         </div>
@@ -32,6 +49,7 @@ const MovieDetails = () => (
             <MovieReviews userName="Joana" review="Super legal!"/>
         </div>
     </div>
-);
+    )
+}
 
 export default MovieDetails;
