@@ -1,5 +1,7 @@
 import ButtonIcon from 'core/components/ButtonIcon';
 import { makeLogin } from 'core/utils/request';
+import { type } from 'os';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import './styles.scss';
 
@@ -15,14 +17,22 @@ const Login = () => {
         handleSubmit,
         formState: { errors },
       } = useForm<FormData>();
+    const [hasError, setHasError] = useState(false);
+
     const onSubmit = (data: FormData) => {
-        console.log(data);
-        makeLogin(data);
+        makeLogin(data)
+        .then(response => {
+            setHasError(false);
+        })
+        .catch(() => {
+            setHasError(true);
+        })
     };
 
     return (
         <div className="login-container">
             <h1 className="login-style">LOGIN</h1>
+            
             <form onSubmit={handleSubmit(onSubmit)}>
                 <input
                     type="email"
@@ -38,6 +48,11 @@ const Login = () => {
                 />
                 <ButtonIcon button="login" />
             </form>
+            {hasError&&(
+                <div className="alert alert-warning mt-4">
+                    Usuário ou senha inválidos!
+                </div>)
+            }
         </div>
     )
     
