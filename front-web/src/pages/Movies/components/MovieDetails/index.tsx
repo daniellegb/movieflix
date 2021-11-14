@@ -1,6 +1,5 @@
-import { ReactComponent as MainImage } from 'core/assets/images/main-image.svg';
 import { Movie } from 'core/types/Movie';
-import { makeRequest } from 'core/utils/request';
+import { makePrivateRequest, makeRequest } from 'core/utils/request';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import MovieMakeReview from '../MovieMakeReview';
@@ -17,9 +16,9 @@ const MovieDetails = () => {
     const [movie, setMovie] = useState<Movie>();
 
     useEffect(() => {
-        makeRequest({url: `/movies/${movieId}`})
+        makePrivateRequest({url: `/movies/${movieId}`})
         .then(response => setMovie(response.data));
-    }, []);
+    }, [movieId]);
 
     
     return (

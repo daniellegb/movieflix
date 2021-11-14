@@ -3,6 +3,16 @@ export type MoviesResponse = {
     totalPages: number;
 }
 
+export type GenresResponse = {
+    content: Genre[];
+    totalPages: number;
+}
+
+export type Genre = {
+    id: number;
+    name: string;
+}
+
 export type Movie = {
     id: number;
     title: string;

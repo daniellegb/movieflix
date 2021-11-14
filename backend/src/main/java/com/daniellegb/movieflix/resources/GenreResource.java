@@ -33,5 +33,4 @@ public class GenreResource {
 		GenreDTO dto = service.findById(id);
 		return ResponseEntity.ok().body(dto);
 	}
-	
 }
