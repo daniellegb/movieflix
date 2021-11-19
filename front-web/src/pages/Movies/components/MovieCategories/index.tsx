@@ -1,49 +1,57 @@
-import {  GenresResponse } from 'core/types/Movie';
+import { MoviesResponse } from 'core/types/Movie';
 import { makePrivateRequest } from 'core/utils/request';
 import { useEffect, useState } from 'react';
-import { Link, Route, Switch } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import MovieCard from '../MovieCard';
 import './styles.scss';
 
 const MovieCategories = () => {
 
-    const [genresResponse, setGenresResponse] = useState<GenresResponse>();
-    const [activePage, setActivePage] = useState(0);
+    const [genreNumber, setGenreNumber] = useState('1');
+    const [moviesResponse, setMoviesResponse] = useState<MoviesResponse>();
 
     useEffect(() => {
         const params = {
-            page: activePage,
-            linesPerPage: 3
+            linesPerPage: 5
         }
-        makePrivateRequest({ url: '/genre', params })
-        .then(response => setGenresResponse(response.data));
-    },[activePage]);
+        makePrivateRequest({ url: `/movies?genreId=${genreNumber}`, params })
+        .then(response => setMoviesResponse(response.data));
+    },[genreNumber]);
 
-    return (<div className="movie-categories ">
-        <select
-            value="Genres"
-            className="select-style text-style"
-            name="genre">
-            <Switch>
-                {genresResponse?.content.map(genre => (
-                <Route path={`/movies?genreId=${genre.id}`}>
-                <option value={genre.id}>{genre.name}</option>
-                </Route>
-                ))}
-            </Switch>
+    const handleOnChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+        const value = event.target.value;
+        setGenreNumber(value);
+        return value;
+    }
 
-                {/*<Switch>
-                    <Route path="/movies?genreId=1">
-                        <option value="1">Science Fiction</option>
-                    </Route>
-                    <Route path="/movies?genreId=2">
-                        <option value="2">Action</option>
-                    </Route>
-                    <Route path="/movies?genreId=3">
-                        <option value="3">Fantasy</option>
-                    </Route>
-                </Switch>*/}
-        </select>
-    </div>);
+    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+    }
+
+    return (
+        <>
+            <form onChange={handleSubmit}>
+                <div className="movie-categories ">
+                    <select className="select-style text-style"
+                        onChange={handleOnChange}>
+                            <option selected value="1">Science Fiction</option>
+                            <option value="2">Action</option>
+                            <option value="3">Fantasy</option>
+                    </select>
+                </div>
+            </form>
+            <div className="cards-align">
+                <div className="d-flex ">
+                    {moviesResponse?.content.map(movie => (
+                        <Link to={`/movies/${movie.id}`} key={movie.id}>
+                            <MovieCard movie={movie} />
+                        </Link>
+                    ))}
+                </div>
+            </div>
+            
+        </>
+    );
 }
 
 export default MovieCategories;
