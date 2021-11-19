@@ -44,6 +44,12 @@ public class ReviewService {
 		Review entity = obj.orElseThrow(() -> new ResourceNotFoundException("Entity not found"));
 		return new ReviewDTO(entity);
 	}
+	
+	@Transactional(readOnly = true) ///////////////////////////////////////////////////////////////////////
+	public List<ReviewDTO> findByMovieId(Long movieId) {
+		List<Review> list = repository.findAll();
+		return createDtoFromMovieSelectedEntities(list, movieId);
+	}
 
 	@Transactional
 	public ReviewDTO insert(ReviewDTO dto) {
@@ -79,6 +85,28 @@ public class ReviewService {
 		}
 		return listDTO;
 	}
+	
+	private List<ReviewDTO> createDtoFromMovieSelectedEntities(List<Review> entities, Long movieId) { ////////////////////////
+		List<ReviewDTO> listDTO = new ArrayList<>();
+		for (int x = 0; x < entities.size(); x++) {
+			if(entities.get(x).getMovie().getId() == movieId) {
+				Review entity = new Review();
+				entity.setId(entities.get(x).getId());
+				entity.setMovie(entities.get(x).getMovie());
+				entity.setText(entities.get(x).getText());
+				try {
+					entity.setUser(userRepository.getOne(entities.get(x).getUser().getId()));
+				} catch (EntityNotFoundException e) {
+					throw new ResourceNotFoundException("Id not find" + entities.get(x).getUser().getId());
+				}
+				ReviewDTO dto2 = new ReviewDTO(entity);
+				listDTO.add(dto2);
+			}
+		}
+		return listDTO;
+	}
+	
+	
 
 	public Long getNextId() {
 		return repository.count() + 1;

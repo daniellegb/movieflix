@@ -33,6 +33,13 @@ public class ReviewResource {
 		return ResponseEntity.ok().body(list);
 	}
 	
+	@GetMapping(value = "/movie/{movieId}")
+	@PreAuthorize("hasAnyRole('ROLE_VISITOR', 'ROLE_MEMBER')")
+	public ResponseEntity<List<ReviewDTO>> findByMovieId(@PathVariable Long movieId) {
+		List<ReviewDTO> list = service.findByMovieId(movieId);
+		return ResponseEntity.ok().body(list);
+	}
+	
 	@GetMapping(value = "/{id}")
 	@PreAuthorize("hasAnyRole('ROLE_VISITOR', 'ROLE_MEMBER')")
 	public ResponseEntity<ReviewDTO> findById(@PathVariable Long id){

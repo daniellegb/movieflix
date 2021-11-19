@@ -1,3 +1,5 @@
+import { type } from "os"
+
 export type MoviesResponse = {
     content: Movie[];
     totalPages: number;
@@ -6,6 +8,13 @@ export type MoviesResponse = {
 export type GenresResponse = {
     content: Genre[];
     totalPages: number;
+}
+
+export type User = {
+    id: number;
+    text: string;
+    movieId: number;
+    user: User;
 }
 
 export type Genre = {

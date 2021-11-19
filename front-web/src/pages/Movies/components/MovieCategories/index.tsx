@@ -21,7 +21,6 @@ const MovieCategories = () => {
     const handleOnChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         const value = event.target.value;
         setGenreNumber(value);
-        return value;
     }
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {

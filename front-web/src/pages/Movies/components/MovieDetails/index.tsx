@@ -50,5 +50,3 @@ const MovieDetails = () => {
     </div>
     )
 }
-
-export default MovieDetails;
