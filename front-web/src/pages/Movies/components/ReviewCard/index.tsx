@@ -1,23 +1,27 @@
 import { ReactComponent as StarImage } from 'core/assets/images/star.svg';
+import { User } from 'core/types/Movie';
 import './styles.scss';
 
 type Props = {
-    userName: string;
-    review: string;
+    user: User;
+    text: string;
 }
 
-const MovieReviews = ({userName,review} : Props) => (
-    <div className="reviews-container">
+const ReviewCard = ({user, text}: Props) => {
+    
+    return(
+    <>
         <div className="user-container">
             <StarImage className="user-star"/>
-            {userName}
+            {user.name}
         </div>
         <div className="review-container">
             <div className="review-text">
-                {review}
+                {text}
             </div>
         </div>
-    </div>
-);
+ 
+   </>
+);}
 
-export default MovieReviews;
+export default ReviewCard;

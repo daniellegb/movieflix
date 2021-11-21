@@ -1,9 +1,9 @@
 import { Movie } from 'core/types/Movie';
-import { makePrivateRequest, makeRequest } from 'core/utils/request';
+import { makePrivateRequest } from 'core/utils/request';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import MovieMakeReview from '../MovieMakeReview';
-import MovieReviews from '../MovieReviews';
+import ReviewCard from '../ReviewCard';
 import './styles.scss';
 
 type ParamsType = {
@@ -44,9 +44,15 @@ const MovieDetails = () => {
             <MovieMakeReview />
         </div>
         <div className="movie-reviews-container">
-            <MovieReviews userName="Ana" review="Muito legal!"/>
-            <MovieReviews userName="Joana" review="Super legal!"/>
+            {movie?.reviews.map( 
+                review => (
+                    <div key={review.id}>
+                        <ReviewCard user={review.user} text={review.text} />
+                    </div>
+                    ))}
         </div>
     </div>
     )
 }
+
+export default MovieDetails;

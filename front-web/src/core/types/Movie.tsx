@@ -10,12 +10,23 @@ export type GenresResponse = {
     totalPages: number;
 }
 
+export type ReviewsResponse = {
+    content: Reviews[];
+    totalPages: number;
+}
+
 export type User = {
+    email: string;
+    id: number;
+    name: string;
+}
+
+{/*export type User = {
     id: number;
     text: string;
     movieId: number;
-    user: User;
-}
+    name: string;
+}*/}
 
 export type Genre = {
     id: number;
@@ -38,5 +49,5 @@ export type Reviews = {
     id: number;
     text: string;
     movieId: number;
-    user: string;
+    user: User;
 }
