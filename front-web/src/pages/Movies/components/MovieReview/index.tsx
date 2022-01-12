@@ -1,5 +1,7 @@
+import axios from "axios";
 import ButtonIcon from "core/components/ButtonIcon";
-import { Movie } from "core/types/Movie";
+import { Movie, User } from "core/types/Movie";
+import { getSesssionData } from "core/utils/auth";
 import { makePrivateRequest } from "core/utils/request";
 import { useEffect, useState } from "react";
 import ReviewCard from "../ReviewCard";
@@ -21,6 +23,15 @@ const MovieReview = ({ id }: Props) => {
         movieId: id
     });
     const [ movie, setMovie ] = useState<Movie>();
+    const [ auth, setAuth ] = useState(false);
+    const [ user, setUser] = useState<User>();
+    const authority = (user?.roles.map(role => (role.authority)));
+
+    useEffect(() => {
+        makePrivateRequest({url: `/users/${getSesssionData().userId}`})
+        .then(response => setUser(response.data));
+        //console.log(authority);
+    }, [user]);
 
     useEffect(() => {
         makePrivateRequest({url: `/movies/${id}`})
@@ -53,7 +64,7 @@ const MovieReview = ({ id }: Props) => {
             <div className="moviemaker-container">
                 <textarea
                     name="text"
-                    value={formData.text}
+                    value={auth? formData.text : "Only members can leave a review!"}
                     className="form-control"
                     onChange={handleOnChange}
                 />
@@ -71,6 +82,17 @@ const MovieReview = ({ id }: Props) => {
                 )
             )}
         </div>
+        <>
+            {user?.roles.map( 
+                role => (
+                    <div key={role.id}>
+                        <>
+                        {role.authority}
+                        </>
+                    </div>
+                )
+            )}
+        </>
         </div>
     );
 }

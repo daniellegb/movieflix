@@ -19,6 +19,7 @@ export type User = {
     email: string;
     id: number;
     name: string;
+    roles: Roles[];
 }
 
 {/*export type User = {
@@ -50,4 +51,9 @@ export type Reviews = {
     text: string;
     movieId: number;
     user: User;
+}
+
+export type Roles = {
+    id: number;
+    authority: string;
 }

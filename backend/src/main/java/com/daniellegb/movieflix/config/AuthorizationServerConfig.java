@@ -17,6 +17,7 @@ import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenCo
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 
 import com.daniellegb.movieflix.components.JwtTokenEnhancer;
+import com.daniellegb.movieflix.repositories.UserRepository;
 
 @Configuration
 @EnableAuthorizationServer
@@ -56,6 +57,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 		clients.inMemory()
 		.withClient(clientId)
 		.secret(passwordEncoder.encode(clientSecret))
+		.authorities("visitor","member")
 		.scopes("read", "write")
 		.authorizedGrantTypes("password")
 		.accessTokenValiditySeconds(jwtDuration);
