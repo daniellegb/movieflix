@@ -2,7 +2,7 @@ import { Movie } from 'core/types/Movie';
 import { makePrivateRequest } from 'core/utils/request';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import MovieMakeReview from '../MovieMakeReview';
+import MovieMakeReview from '../MovieReview';
 import ReviewCard from '../ReviewCard';
 import './styles.scss';
 
@@ -42,14 +42,7 @@ const MovieDetails = () => {
         <div className="movie-text-box-container">
             {movie?.id && <MovieMakeReview id={movie?.id}/>}
         </div>
-        <div className="movie-reviews-container">
-            {movie?.reviews.map( 
-                review => (
-                    <div key={review.id}>
-                        <ReviewCard user={review.user} text={review.text} />
-                    </div>
-                    ))}
-        </div>
+
     </div>
     )
 }
