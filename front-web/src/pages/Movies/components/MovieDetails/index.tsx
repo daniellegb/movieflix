@@ -13,14 +13,13 @@ type ParamsType = {
 const MovieDetails = () => {
 
     const { movieId } = useParams<ParamsType>();
-    const [movie, setMovie] = useState<Movie>();
+    const [ movie, setMovie ] = useState<Movie>();
 
     useEffect(() => {
         makePrivateRequest({url: `/movies/${movieId}`})
         .then(response => setMovie(response.data));
     }, [movieId]);
 
-    
     return (
         <div className="movie-details-container">
         <div className="movie-detail-container">
@@ -41,7 +40,7 @@ const MovieDetails = () => {
             </div>
         </div>
         <div className="movie-text-box-container">
-            <MovieMakeReview />
+            {movie?.id && <MovieMakeReview id={movie?.id}/>}
         </div>
         <div className="movie-reviews-container">
             {movie?.reviews.map( 
