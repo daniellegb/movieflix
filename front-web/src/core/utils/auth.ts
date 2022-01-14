@@ -22,3 +22,4 @@ export const getSesssionData = () => {
 
     return parsedSessionData as LoginResponse;
 }
+

@@ -1,4 +1,3 @@
-import axios from "axios";
 import ButtonIcon from "core/components/ButtonIcon";
 import { Movie, User } from "core/types/Movie";
 import { getSesssionData } from "core/utils/auth";
@@ -25,12 +24,18 @@ const MovieReview = ({ id }: Props) => {
     const [ movie, setMovie ] = useState<Movie>();
     const [ auth, setAuth ] = useState(false);
     const [ user, setUser] = useState<User>();
-    const authority = (user?.roles.map(role => (role.authority)));
-
+    
     useEffect(() => {
         makePrivateRequest({url: `/users/${getSesssionData().userId}`})
         .then(response => setUser(response.data));
-        //console.log(authority);
+        const author = user?.roles.map(role => (role.authority))
+        if(author != undefined){
+            for (const authority of author){
+                if(authority == "ROLE_MEMBER"){
+                    setAuth(true);
+                }
+            }
+        }
     }, [user]);
 
     useEffect(() => {
@@ -60,39 +65,28 @@ const MovieReview = ({ id }: Props) => {
 
     return(
         <div className="movie-text-box-container">
-        <form onSubmit={handleSubmit}>
-            <div className="moviemaker-container">
-                <textarea
-                    name="text"
-                    value={auth? formData.text : "Only members can leave a review!"}
-                    className="form-control"
-                    onChange={handleOnChange}
-                />
-                <div className="button-position">
-                    <ButtonIcon button="salvar avaliação" />
+            <form onSubmit={handleSubmit}>
+                <div className="moviemaker-container">
+                    <textarea
+                        name="text"
+                        value={auth? formData.text : "Only members can leave a review!"}
+                        className="form-control"
+                        onChange={handleOnChange}
+                    />
+                    <div className="button-position">
+                        <ButtonIcon button="salvar avaliação" />
+                    </div>
                 </div>
+            </form>
+            <div className="movie-reviews-container">
+                {movie?.reviews.map( 
+                    review => (
+                        <div key={review.id}>
+                            <ReviewCard user={review.user} text={review.text} />
+                        </div>
+                    )
+                )}
             </div>
-        </form>
-        <div className="movie-reviews-container">
-            {movie?.reviews.map( 
-                review => (
-                    <div key={review.id}>
-                        <ReviewCard user={review.user} text={review.text} />
-                    </div>
-                )
-            )}
-        </div>
-        <>
-            {user?.roles.map( 
-                role => (
-                    <div key={role.id}>
-                        <>
-                        {role.authority}
-                        </>
-                    </div>
-                )
-            )}
-        </>
         </div>
     );
 }
