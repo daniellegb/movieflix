@@ -3,12 +3,14 @@ import { makePrivateRequest } from 'core/utils/request';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import MovieCard from '../MovieCard';
+import Pagination from 'core/components/Pagination';
 import './styles.scss';
 
 const MovieCategories = () => {
 
     const [genreNumber, setGenreNumber] = useState('1');
     const [moviesResponse, setMoviesResponse] = useState<MoviesResponse>();
+    
 
     useEffect(() => {
         const params = {

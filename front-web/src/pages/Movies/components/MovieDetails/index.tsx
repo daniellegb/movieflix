@@ -3,7 +3,6 @@ import { makePrivateRequest } from 'core/utils/request';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import MovieMakeReview from '../MovieReview';
-import ReviewCard from '../ReviewCard';
 import './styles.scss';
 
 type ParamsType = {
