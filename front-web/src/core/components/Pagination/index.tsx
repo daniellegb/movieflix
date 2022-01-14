@@ -1,4 +1,4 @@
-import { ReactComponent as ArrowIcon } from 'core/assets/images/arrow.svg';
+import { ReactComponent as Arrow } from 'core/assets/images/arrow.svg';
 import { generateList } from 'core/utils/list';
 import './styles.scss';
 
@@ -16,7 +16,7 @@ const Pagination = ({ totalPages, activePage, onChange }: Props) => {
 
     return (
         <div className="pagination-container">
-            <ArrowIcon
+            <Arrow
                 className={`pagination-previous ${previousClass}`}
                 onClick={() => onChange(activePage - 1)}
             />
@@ -29,7 +29,7 @@ const Pagination = ({ totalPages, activePage, onChange }: Props) => {
                     {item + 1}
                 </div>
             ))}
-            <ArrowIcon
+            <Arrow
                 className={`pagination-next ${nextClass}`}
                 onClick={() => onChange(activePage + 1)}
             />
