@@ -31,7 +31,7 @@ const MovieDetails = () => {
                     {movie?.year}
                 </h3>
                 <h3 className="movie-subtitle">
-                    {movie?.subtitle}
+                    {movie?.subTitle}
                 </h3>
                 <h4 className="movie-synopsis">
                     {movie?.synopsis}
@@ -40,6 +40,7 @@ const MovieDetails = () => {
         </div>
         <div className="movie-text-box-container">
             {movie?.id && <MovieMakeReview id={movie?.id}/>}
+            
         </div>
 
     </div>

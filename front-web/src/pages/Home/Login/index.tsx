@@ -1,7 +1,6 @@
 import ButtonIcon from 'core/components/ButtonIcon';
 import { saveSessionData } from 'core/utils/auth';
 import { makeLogin } from 'core/utils/request';
-import { type } from 'os';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';

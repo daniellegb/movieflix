@@ -8,16 +8,16 @@ type Props = {
 const MovieCard = ({movie} : Props) => (
 
     <div className="card-base">
-        <img src={""} alt={"filme"} className="movie-card-image" />
+        <img src={movie.imgUrl} alt={"filme"} className="movie-card-image" />
         <div className="movie-info">
-            <div className="movie-title">
+            <div className="movie-card-title">
                 {movie.title}
             </div>
-            <div className="movie-year">
+            <div className="movie-card-year">
                 {movie.year}
             </div>
-            <div className="movie-subtitle">
-                {movie.subtitle}
+            <div className="movie-card-subtitle">
+                {movie.subTitle}
             </div>
         </div>
     </div>

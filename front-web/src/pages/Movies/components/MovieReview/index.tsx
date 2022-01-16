@@ -64,7 +64,7 @@ const MovieReview = ({ id }: Props) => {
     }
 
     return(
-        <div className="movie-text-box-container">
+        <>
             <form onSubmit={handleSubmit}>
                 <div className="moviemaker-container">
                     <textarea
@@ -87,7 +87,7 @@ const MovieReview = ({ id }: Props) => {
                     )
                 )}
             </div>
-        </div>
+        </>
     );
 }
 

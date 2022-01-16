@@ -1,6 +1,6 @@
 .card-base{
     width: 258px;   
-    height: 340px;
+    height: 310px;
     background: #6C6C6C;
     box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.25);
     border-radius: 4px;
@@ -11,7 +11,6 @@
     width: 258px;
     height: 165px;
     margin-top: 25px;
-    padding: 25px 220px 132px 0px;
     background: black;
 }
 
@@ -19,21 +18,26 @@
     margin: 15px;
 }
 
-.movie-title{
+.movie-card-title{
+    text-decoration: none;
     font-size: 20px;
     letter-spacing: -0.015em;
     font-weight: bold;
     color: #FFFFFF;
 }
 
-.movie-year{
+.movie-card-year{
+    text-decoration: none;
     font-size: 16px;
     letter-spacing: -0.015em;
+    font-weight: normal;
     color: #FFC700;
 }
 
-.movie-subtitle{
+.movie-card-subtitle{
+    text-decoration: none;
     font-size: 14px;
+    font-weight: normal;
     letter-spacing: -0.015em;
     color: #FFFFFF;
 }

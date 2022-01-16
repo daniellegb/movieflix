@@ -11,8 +11,14 @@
     height: 510px;
     background: #6C6C6C;
     box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.25);
-    padding-left: 100px;
+    padding-left: 140px;
     padding-top: 40px;
+}
+
+.image-container {
+    padding-top: 100px;
+    width: 500px;
+    height: 310px;
 }
 
 .movie-text-box-container {
@@ -31,17 +37,11 @@
     margin-top: 40px;
 }
 
-.image-container {
-    padding-top: 100px;
-    width: 500px;
-    height: 315px;
-}
-
 .details-container {
     width: 500px;
     height: 500px;
     margin-top: -260px;
-    margin-left: 400px;
+    margin-left: 440px;
 
 }
 
@@ -76,4 +76,5 @@
     border: 1px solid #E1E1E1;
     box-sizing: border-box;
     border-radius: 10px;
+    padding: 16px 20px;
 }

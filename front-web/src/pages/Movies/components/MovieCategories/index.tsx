@@ -15,7 +15,7 @@ const MovieCategories = () => {
     useEffect(() => {
         const params = {
             page: activePage,
-            linesPerPage: 3
+            linesPerPage: 4
         }
         makePrivateRequest({ url: `/movies?genreId=${genreNumber}`, params })
         .then(response => setMoviesResponse(response.data));
@@ -23,6 +23,7 @@ const MovieCategories = () => {
 
     const handleOnChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         const value = event.target.value;
+        setActivePage(0);
         setGenreNumber(value);
     }
 
@@ -50,13 +51,16 @@ const MovieCategories = () => {
                         </Link>
                     ))}
                 </div>
-                {moviesResponse && (
-                <Pagination 
-                totalPages={moviesResponse.totalPages}
-                activePage={activePage}
-                onChange={page => setActivePage(page)}
-                />
-            )}
+                <div className="pagination-contet">
+                    {moviesResponse && (
+                        <Pagination 
+                        totalPages={moviesResponse.totalPages}
+                        activePage={activePage}
+                        onChange={page => setActivePage(page)
+                        }
+                        />
+                    )}
+                </div>
             </div>
             
         </>
