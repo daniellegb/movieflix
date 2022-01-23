@@ -29,9 +29,9 @@ const MovieReview = ({ id }: Props) => {
         makePrivateRequest({url: `/users/${getSesssionData().userId}`})
         .then(response => setUser(response.data));
         const author = user?.roles.map(role => (role.authority));
-        if(author != undefined){
+        if(author !== undefined){
             for (const authority of author){
-                if(authority == "ROLE_MEMBER"){
+                if(authority === "ROLE_MEMBER"){
                     setAuth(true);
                 }
             }

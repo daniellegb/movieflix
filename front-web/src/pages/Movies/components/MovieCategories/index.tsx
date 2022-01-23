@@ -19,6 +19,7 @@ const MovieCategories = () => {
         }
         makePrivateRequest({ url: `/movies?genreId=${genreNumber}`, params })
         .then(response => setMoviesResponse(response.data));
+        
     },[activePage || genreNumber]);
 
     const handleOnChange = (event: React.ChangeEvent<HTMLSelectElement>) => {

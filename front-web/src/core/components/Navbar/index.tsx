@@ -9,10 +9,9 @@ const Navbar = () => {
     const location = useLocation();
     console.log(location.pathname);
     const [ showLogout, setShowLogout ] = useState(false);
-    const [ userConnected, setUserConnected] = useState(false);
 
     useEffect( () => {
-            if(location.pathname!="/"){
+            if(location.pathname!=="/"){
                 setShowLogout(true);
             } else setShowLogout(false);
         },[location.pathname]);

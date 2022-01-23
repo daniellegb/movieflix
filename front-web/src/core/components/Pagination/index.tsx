@@ -18,7 +18,7 @@ const Pagination = ({ totalPages, activePage, onChange }: Props) => {
         <div className="pagination-container">
             <Arrow
                 className={`pagination-previous ${previousClass}`}
-                onClick={() => onChange((activePage!=0)? activePage - 1 : activePage)}
+                onClick={() => onChange((activePage!==0)? activePage - 1 : activePage)}
             />
             {items.map(item => (
                 <div
