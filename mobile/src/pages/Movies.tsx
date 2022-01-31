@@ -2,6 +2,8 @@ import React from 'react';
 import {View} from "react-native";
 import { MovieCard } from '../components';
 import moviePoster from '../assets/moviePoster.png';
+import { ScrollView } from 'react-native-gesture-handler';
+import { theme } from '../styles';
 
 const movies = [
     {
@@ -36,13 +38,13 @@ const movies = [
 
 const Movies: React.FC = () => {
     return(
-        <View>
+        <ScrollView contentContainerStyle={theme.scrollContainer}>
             {
                 movies.map((movie) => (
                     <MovieCard {...movie}/>
                 ))
             }
-        </View>
+        </ScrollView>
     );
 
 };

@@ -14,7 +14,7 @@ const Home: React.FC = () => {
                 <TouchableOpacity 
                     style={theme.primaryButton} 
                     activeOpacity={0.8}
-                    onPress={() => navigation.navigate(Movies)}
+                    onPress={() => navigation.navigate("Movies")}
                 >
                     <Text style={(text.loginTextButton)}>fazer login</Text>
                 </TouchableOpacity>

@@ -28,6 +28,21 @@ const text = StyleSheet.create ({
         textTransform: "uppercase",
         fontSize: 20,
     },
+    movieCardTextTitle:{
+        fontSize: 20,
+        color: colors.white,
+        fontWeight: "bold"
+    },
+    movieCardTextYear:{
+        fontSize: 16,
+        color: colors.yellow,
+        fontWeight: "bold"
+    },
+    movieCardTextSubTitle:{
+        fontSize: 14,
+        color: colors.white,
+        fontWeight: "normal"
+    }
 }
 ,)
 
@@ -71,6 +86,21 @@ const theme = StyleSheet.create({
 
     arrowContainer: {
         margin: 50,
+    },
+
+    scrollContainer: {
+        padding: 15,
+        backgroundColor: colors.darkGrey,
+    },
+    movieCard:{
+        backgroundColor: colors.mediumGrey,
+        justifyContent: "space-around",
+        margin: 20,
+    },
+    imgCard: {
+        marginTop: 20,
+        width: "100%",
+        height: 180
     }
 })
 
