@@ -1,48 +1,39 @@
 import React from 'react';
-import {View} from "react-native";
+import {ActivityIndicator, View} from "react-native";
 import { MovieCard } from '../components';
-import moviePoster from '../assets/moviePoster.png';
 import { ScrollView } from 'react-native-gesture-handler';
 import { theme } from '../styles';
-
-const movies = [
-    {
-        id: 1,
-        imgUrl: moviePoster,
-        title: "Title",
-        year: "1999",
-        subTitle: "SubTitle",
-    },
-    {
-        id: 2,
-        imgUrl: moviePoster,
-        title: "Title",
-        year: "1999",
-        subTitle: "SubTitle",
-    },
-    {
-        id: 3,
-        imgUrl: moviePoster,
-        title: "Title",
-        year: "1999",
-        subTitle: "SubTitle",
-    },
-    {
-        id: 4,
-        imgUrl: moviePoster,
-        title: "Title",
-        year: "1999",
-        subTitle: "SubTitle",
-    }
-]
+import { useState, useEffect } from "react";
+import { api } from '../services';
 
 const Movies: React.FC = () => {
+
+    const [ movies, setMovies ] = useState([]);
+    const [ loading, setLoading ] = useState(false);
+
+    async function fillMovies() {
+        setLoading(true);
+       // const res = await api.get(`/movies`);
+        setMovies(((await api.get(`/movies`)).data.content));
+        setLoading(false);
+    }
+
+    useEffect(() => {
+        fillMovies;
+    }, [])
+
     return(
         <ScrollView contentContainerStyle={theme.scrollContainer}>
-            {
-                movies.map((movie) => (
-                    <MovieCard {...movie}/>
-                ))
+            {loading ? 
+                (
+                    <ActivityIndicator size="large" />
+                ) 
+                : 
+                (
+                    movies.map((movie) => (
+                        <MovieCard {...movie}/>
+                    ))
+                )
             }
         </ScrollView>
     );
