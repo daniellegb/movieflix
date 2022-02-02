@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import { withSafeAreaInsets } from 'react-native-safe-area-context';
 
 const colors = {
     white: "#FFFFFF",
@@ -64,7 +65,7 @@ const theme = StyleSheet.create({
         height: '100%',
         backgroundColor: colors.mediumGrey,
         borderRadius: 4,
-        justifyContent: "space-around",
+        justifyContent: "space-evenly",
         alignItems: "center",
         shadowColor: colors.black,
         shadowOffset: {
@@ -101,7 +102,24 @@ const theme = StyleSheet.create({
         marginTop: 20,
         width: "100%",
         height: 180
+    },
+    form: {
+    },
+    textInput: {
+        backgroundColor: colors.white,
+        width: 270,
+        height: 50,
+        margin: 20,
+        padding: 15,
+        borderRadius: 4,
+    },
+    passwordContainer: {
+
+    },
+    toggle: {
+        
     }
+
 })
 
 export { colors, theme, text };

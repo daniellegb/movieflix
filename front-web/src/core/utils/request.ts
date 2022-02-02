@@ -37,13 +37,17 @@ export const makePrivateRequest = ({ method = 'GET', url, data, params}: Request
 
 export const makeLogin = (loginData: LoginData) => {
     const token = `${CLIENT_ID}:${CLIENT_SECRET}`;
+    console.log(token);
 
     const headers = {
         Authorization: `Basic ${window.btoa(token)}`,
         'Content-Type': 'application/x-www-form-urlencoded'
     }
 
+    console.log(window.btoa(token));
+
     const payload = qs.stringify({ ...loginData, grant_type: 'password' });
+    console.log(payload);
 
     return makeRequest({ url: '/oauth/token', data: payload, method: 'POST', headers });
 }
