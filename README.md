@@ -14,6 +14,7 @@ A aplicação consiste em um sistema que armazena e exibe avaliações sobre fil
 Ana (membro):
 - login: ana@gmail.com
 - senha: 123456
+
 Bob (visitante):
 - login:bob@gmail.com
 - senha: 123456
