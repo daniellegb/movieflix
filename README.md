@@ -1,5 +1,5 @@
 # DS Movie
-[![NPM](https://github.com/daniellegb/movieflix/blob/main/LICENSE) 
+[![NPM](https://img.shields.io/npm/l/react)](https://github.com/daniellegb/movieflix/blob/main/LICENSE)
 
 # Sobre o projeto
 
