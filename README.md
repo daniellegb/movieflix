@@ -5,7 +5,7 @@
 
 https://daniellegb-movieflix.netlify.app/
 
-DS Deliver é uma aplicação full stack web e mobile construída durante a 2ª edição da **Semana DevSuperior** (#sds2), evento organizado pela [DevSuperior](https://devsuperior.com "Site da DevSuperior").
+DS Movie é uma aplicação web construída durante o Bootcamp FullStack da [DevSuperior](https://devsuperior.com "Site da DevSuperior").
 
 A aplicação consiste em um sistema que armazena e exibe avaliações sobre filmes previamente catalogados no banco de dados. Apenas usuários membros podem deixar comentários, usuários visitantes podem apenas lê-los.
 
