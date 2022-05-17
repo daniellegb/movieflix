@@ -34,7 +34,7 @@ async function setASyncKeys(key: string, value: string) {
 export async function isAuthenticated() {
     try {
         const token = await ASyncStorage.getItem("@token");
-        token ? console.warn("Logado") : console.warn ("Deslogado")
+        token ? console.warn("Logado") : console.warn ("Deslogado");
     } catch (e) {
         console.warn(e);
     }

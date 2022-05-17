@@ -5,6 +5,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 import { theme } from '../styles';
 import { useState, useEffect } from "react";
 import { api } from '../services';
+import { isAuthenticated } from '../services/auth';
 
 const Movies: React.FC = () => {
 
@@ -14,6 +15,7 @@ const Movies: React.FC = () => {
     async function fillMovies() {
         setLoading(true);
        // const res = await api.get(`/movies`);
+       console.log("filling");
         setMovies(((await api.get(`/movies`)).data.content));
         setLoading(false);
     }
